@@ -171,7 +171,7 @@ public class MailboxEventAnalyserTest {
                 }
 
                 
-                public Map<Long, Flags> setFlags(Flags flags, boolean value, boolean replace, MessageRange set, MailboxSession mailboxSession) throws MailboxException {
+                public Map<Long, Flags> setFlags(Flags flags, FlagsUpdateMode mode, MessageRange set, MailboxSession mailboxSession) throws MailboxException {
                     throw new UnsupportedOperationException("Not implemented");
 
                 }

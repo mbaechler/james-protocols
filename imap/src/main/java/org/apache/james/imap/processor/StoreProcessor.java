@@ -230,19 +230,17 @@ public class StoreProcessor extends AbstractMailboxProcessor<StoreRequest> {
         final long unchangedSince = request.getUnchangedSince();
         final boolean replace;
         final boolean value;
+        final MessageManager.FlagsUpdateMode mode;
         if (isSignedMinus) {
-            value = false;
-            replace = false;
+            mode = MessageManager.FlagsUpdateMode.REMOVE;
         } else if (isSignedPlus) {
-            value = true;
-            replace = false;
+            mode = MessageManager.FlagsUpdateMode.ADD;
         } else {
-            replace = true;
-            value = true;
+            mode = MessageManager.FlagsUpdateMode.REPLACE;
         }
         
         SelectedMailbox selected = session.getSelected();
-        final Map<Long, Flags> flagsByUid = mailbox.setFlags(flags, value, replace, messageSet, mailboxSession);
+        final Map<Long, Flags> flagsByUid = mailbox.setFlags(flags, mode, messageSet, mailboxSession);
         // As the STORE command is allowed to create a new "flag/keyword", we need to send a FLAGS and PERMANENTFLAGS response before the FETCH response
         // if some new flag/keyword was used
         // See IMAP-303

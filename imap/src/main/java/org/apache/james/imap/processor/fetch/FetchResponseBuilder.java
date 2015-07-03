@@ -122,7 +122,7 @@ public final class FetchResponseBuilder {
         boolean ensureFlagsResponse = false;
         final Flags resultFlags = result.getFlags();
         if (fetch.isSetSeen() && !resultFlags.contains(Flags.Flag.SEEN)) {
-            mailbox.setFlags(new Flags(Flags.Flag.SEEN), true, false, MessageRange.one(resultUid), mailboxSession);
+            mailbox.setFlags(new Flags(Flags.Flag.SEEN), MessageManager.FlagsUpdateMode.ADD, MessageRange.one(resultUid), mailboxSession);
             resultFlags.add(Flags.Flag.SEEN);
             ensureFlagsResponse = true;
         }
