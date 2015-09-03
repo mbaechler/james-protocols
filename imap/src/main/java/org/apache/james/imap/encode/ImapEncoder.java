@@ -29,6 +29,8 @@ import org.apache.james.imap.api.process.ImapSession;
  */
 public interface ImapEncoder {
 
+    String COMPONENT_NAME = "imapEncoder";
+
     /**
      * Writes response. TODO: pass in writer rather than composer
      * 

@@ -32,6 +32,8 @@ import org.apache.james.imap.api.message.response.ImapResponseMessage;
  */
 public interface ImapProcessor {
 
+    String COMPONENT_NAME = "imapProcessor";
+
     /**
      * Performs processing of the command. If this processor does not understand
      * the given message then it must return an appropriate message as per the
