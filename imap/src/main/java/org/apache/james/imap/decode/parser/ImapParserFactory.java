@@ -28,6 +28,7 @@ import org.apache.james.imap.decode.DelegatingImapCommandParser;
 import org.apache.james.imap.decode.ImapCommandParser;
 import org.apache.james.imap.decode.ImapCommandParserFactory;
 import org.apache.james.imap.decode.MessagingImapCommandParser;
+import org.apache.james.imap.processor.GetQuotaRootProcessor;
 
 /**
  * A factory for ImapCommand instances, provided based on the command name.
@@ -101,6 +102,11 @@ public class ImapParserFactory implements ImapCommandParserFactory {
         
         _imapCommands.put(ImapConstants.ENABLE_COMMAND_NAME, EnableCommandParser.class);
 
+        // RFC2087
+        // GETQUOTAROOT, GETQUOTA, SETQUOTA
+        _imapCommands.put(ImapConstants.GETQUOTAROOT_COMMAND_NAME, GetQuotaRootCommandParser.class);
+        _imapCommands.put(ImapConstants.GETQUOTA_COMMAND_NAME, GetQuotaCommandParser.class);
+        _imapCommands.put(ImapConstants.SETQUOTA_COMMAND_NAME, SetQuotaCommandParser.class);
 
     }
 
