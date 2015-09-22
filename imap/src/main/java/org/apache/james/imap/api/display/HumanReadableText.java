@@ -79,6 +79,8 @@ public class HumanReadableText {
 
     public static final HumanReadableText FAILURE_NO_SUCH_MAILBOX = new HumanReadableText("org.apache.james.imap.FAILURE_NO_SUCH_MAILBOX", "failed. No such mailbox.");
 
+    public static final HumanReadableText FAILURE_NO_QUOTA_RESOURCE = new HumanReadableText("org.apache.james.imap.FAILURE_NO_SUCH_QUOTA_RESOURCE", "failed. No such quota resource.");
+
     public static final HumanReadableText START_TRANSACTION_FAILED = new HumanReadableText("org.apache.james.imap.START_TRANSACTION_FAILED", "failed. Cannot start transaction.");
 
     public static final HumanReadableText COMMIT_TRANSACTION_FAILED = new HumanReadableText("org.apache.james.imap.COMMIT_TRANSACTION_FAILED", "failed. Transaction commit failed.");
@@ -161,6 +163,9 @@ public class HumanReadableText {
 
     public static final String UNSUPPORTED_RIGHT_KEY = "org.apache.james.imap.UNSUPPORTED_RIGHT";
     public static final String UNSUPPORTED_RIGHT_DEFAULT_VALUE = "The {0} right is not supported.";
+
+    public static final String UNDEFINED_QUOTA_ROOT_KEY = "org.apache.james.imap.UNDEFINED_QUOTA_ROOT_KEY";
+    public static final String UNDEFINED_QUOTA_ROOT_DEFAULT_VALUE = "The Quota Root {0} does not exist.";
 
     private final String defaultValue;
 

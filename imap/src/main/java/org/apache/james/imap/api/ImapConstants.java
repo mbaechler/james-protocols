@@ -104,6 +104,8 @@ public interface ImapConstants {
     public static final String SUPPORTS_QRESYNC = "QRESYNC";
 
     public static final String SUPPORTS_ACL = "ACL";
+
+    public static final String SUPPORTS_QUOTA = "QUOTA";
     
     public static final String INBOX_NAME = "INBOX";
 
@@ -227,6 +229,12 @@ public interface ImapConstants {
     
     public static final String MYRIGHTS_COMMAND_NAME = "MYRIGHTS";
 
+    public static final String GETQUOTAROOT_COMMAND_NAME = "GETQUOTAROOT";
+
+    public static final String GETQUOTA_COMMAND_NAME = "GETQUOTA";
+
+    public static final String SETQUOTA_COMMAND_NAME = "SETQUOTA";
+
     public static final String LIST_RESPONSE_NAME = "LIST";
 
     public static final String XLIST_RESPONSE_NAME = "XLIST";
@@ -236,6 +244,10 @@ public interface ImapConstants {
     public static final String SEARCH_RESPONSE_NAME = "SEARCH";
 
     public static final String ACL_RESPONSE_NAME = "ACL";
+
+    public static final String QUOTA_RESPONSE_NAME = "QUOTA";
+
+    public static final String QUOTAROOT_RESPONSE_NAME = "QUOTAROOT";
 
     public static final String LISTRIGHTS_RESPONSE_NAME = "LISTRIGHTS";
     
@@ -278,5 +290,9 @@ public interface ImapConstants {
 
     public static final int DEFAULT_BATCH_SIZE = 100;
 
+    // Quota resources definition
 
+    public static final String STORAGE_QUOTA_RESOURCE = "STORAGE";
+
+    public static final String MESSAGE_QUOTA_RESOURCE = "MESSAGE";
 }
