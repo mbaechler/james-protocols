@@ -81,6 +81,11 @@
             <groupId>com.beetstra.jutf7</groupId>
             <artifactId>jutf7</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
             
         <dependency>
             <groupId>org.jmock</groupId>
@@ -90,6 +95,11 @@
         <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock-junit4</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.james</groupId>
+            <artifactId>apache-james-mailbox-store</artifactId>
             <scope>test</scope>
         </dependency>
             
