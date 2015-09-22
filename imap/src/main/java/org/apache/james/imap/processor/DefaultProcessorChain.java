@@ -29,13 +29,18 @@ import org.apache.james.imap.api.process.MailboxTyper;
 import org.apache.james.imap.processor.fetch.FetchProcessor;
 import org.apache.james.mailbox.MailboxManager;
 import org.apache.james.mailbox.SubscriptionManager;
+import org.apache.james.mailbox.quota.QuotaManager;
+import org.apache.james.mailbox.quota.QuotaRootResolver;
 
 /**
  * TODO: perhaps this should be a POJO
  */
 public class DefaultProcessorChain {
 
-    public static final ImapProcessor createDefaultChain(final ImapProcessor chainEndProcessor, final MailboxManager mailboxManager, final SubscriptionManager subscriptionManager, final StatusResponseFactory statusResponseFactory, MailboxTyper mailboxTyper, long idleKeepAlive, TimeUnit milliseconds, Set<String> disabledCaps) {
+    public static ImapProcessor createDefaultChain(final ImapProcessor chainEndProcessor,
+                  final MailboxManager mailboxManager, final SubscriptionManager subscriptionManager,
+                  final StatusResponseFactory statusResponseFactory, MailboxTyper mailboxTyper, final QuotaManager quotaManager,
+                  final QuotaRootResolver quotaRootResolver, long idleKeepAlive, TimeUnit milliseconds, Set<String> disabledCaps) {
         final SystemMessageProcessor systemProcessor = new SystemMessageProcessor(chainEndProcessor, mailboxManager);
         final LogoutProcessor logoutProcessor = new LogoutProcessor(systemProcessor, mailboxManager, statusResponseFactory);
 
@@ -94,7 +99,10 @@ public class DefaultProcessorChain {
         final MyRightsProcessor myRightsProcessor = new MyRightsProcessor(listRightsProcessor, mailboxManager, statusResponseFactory);
         
         final EnableProcessor enableProcessor = new EnableProcessor(myRightsProcessor, mailboxManager, statusResponseFactory);
-        
+
+        final GetQuotaProcessor getQuotaProcessor = new GetQuotaProcessor(enableProcessor, mailboxManager, statusResponseFactory, quotaManager, quotaRootResolver);
+        final SetQuotaProcessor setQuotaProcessor = new SetQuotaProcessor(getQuotaProcessor, mailboxManager, statusResponseFactory);
+        final GetQuotaRootProcessor getQuotaRootProcessor = new GetQuotaRootProcessor(setQuotaProcessor, mailboxManager, statusResponseFactory, quotaRootResolver, quotaManager);
         // add for QRESYNC
         enableProcessor.addProcessor(selectProcessor);
         
@@ -121,7 +129,9 @@ public class DefaultProcessorChain {
         
         capabilityProcessor.addProcessor(getACLProcessor);
 
-        return enableProcessor;
+        capabilityProcessor.addProcessor(getQuotaRootProcessor);
+
+        return getQuotaRootProcessor;
 
     }
 
